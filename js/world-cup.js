@@ -116,7 +116,7 @@
       return _ref4;
     }
 
-    Picks.prototype.template = "<li>\n  <h2><%- harvester %></h2>\n  <table>\n    <% _.each(teams, function(team) { %>\n      <tr>\n        <td><%= team.team %></td>\n        <td><%= team.points %></td>\n      </tr>\n    <% }); %>\n      <tr>\n        <td></td>\n        <td><%- total %></td>\n  </table>\n</li>";
+    Picks.prototype.template = "<li>\n  <h2><%- harvester %></h2>\n  <table>\n    <% _.each(teams, function(team) { %>\n      <tr>\n        <td><%= team.team %></td>\n        <td><%= team.points %></td>\n      </tr>\n    <% }); %>\n      <tr>\n        <td></td>\n        <th><%- total %></th>\n  </table>\n</li>";
 
     Picks.prototype.initialize = function() {
       return this.render();

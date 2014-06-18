@@ -44,7 +44,7 @@ class WorldCup.Views.Picks extends Backbone.View
         <% }); %>
           <tr>
             <td></td>
-            <td><%- total %></td>
+            <th><%- total %></th>
       </table>
     </li>
     """
