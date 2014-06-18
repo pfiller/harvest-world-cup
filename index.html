@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Harvest's World Cup Pool</title>
+</head>
+<body>
+  <ul class="js-picks"></ul>
+
+  <script type="text/javascript" src="lib/jquery.js"></script>
+  <script type="text/javascript" src="lib/underscore.js"></script>
+  <script type="text/javascript" src="lib/backbone.js"></script>
+  <script type="text/javascript" src="lib/ferry.js"></script>
+  <script id="picks-data-island" type="application/json">
+    [
+      { "harvester": "Alanna", "teams": ["Spain", "Uruguay", "Italy", "Ghana"] },
+      { "harvester": "Albert", "teams": ["Spain", "Colombia", "Italy", "South Korea"] },
+      { "harvester": "Andrew", "teams": ["Spain", "Uruguay", "Portugal", "Greece"] },
+      { "harvester": "Arun", "teams": ["Argentina", "England", "Portugal", "United States"] },
+      { "harvester": "Barry", "teams": ["Brazil", "Uruguay", "Netherlands", "United States"] },
+      { "harvester": "Cade", "teams": ["Spain", "Colombia", "Italy", "United States"] },
+      { "harvester": "Calina", "teams": ["Brazil", "Uruguay", "Netherlands", "Japan"] },
+      { "harvester": "Christopher", "teams": ["Brazil", "Belgium", "Netherlands", "United States"] },
+      { "harvester": "Daniel", "teams": ["Brazil", "Chile", "Italy", "Greece"] },
+      { "harvester": "Danny", "teams": ["Argentina", "Colombia", "Netherlands", "Ghana"] },
+      { "harvester": "Doug F.", "teams": ["Brazil", "Uruguay", "Italy", "Mexico"] },
+      { "harvester": "Doug M.", "teams": ["Spain", "England", "Portugal", "Ivory Coast"] },
+      { "harvester": "Evan", "teams": ["Argentina", "Uruguay", "Portugal", "Costa Rica"] },
+      { "harvester": "Jae", "teams": ["Spain", "Uruguay", "Netherlands", "Ghana"] },
+      { "harvester": "Jeremy", "teams": ["Brazil", "Colombia", "Russia", "United States"] },
+      { "harvester": "Jon", "teams": ["Brazil", "Colombia", "Italy", "United States"] },
+      { "harvester": "Joschka", "teams": ["Germany", "England", "Italy", "Greece"] },
+      { "harvester": "Katie", "teams": ["Brazil", "England", "Netherlands", "Honduras"] },
+      { "harvester": "Ken", "teams": ["Brazil", "Chile", "Netherlands", "United States"] },
+      { "harvester": "Lorenzo", "teams": ["Spain", "Colombia", "Italy", "Cameroon"] },
+      { "harvester": "Matthew", "teams": ["Brazil", "Uruguay", "Portugal", "Greece"] },
+      { "harvester": "Meghan", "teams": ["Spain", "England", "Italy", "Mexico"] },
+      { "harvester": "Patrick", "teams": ["Argentina", "Belgium", "Italy", "Croatia"] },
+      { "harvester": "Phyllis", "teams": ["Argentina", "Colombia", "Italy", "Mexico"] },
+      { "harvester": "Sergey", "teams": ["Spain", "Uruguay", "Netherlands", "Japan"] },
+      { "harvester": "Sri", "teams": ["Spain", "Belgium", "Italy", "United States"] },
+      { "harvester": "T.J.", "teams": ["Brazil", "Uruguay", "Italy", "South Korea"] },
+      { "harvester": "Warwick", "teams": ["Argentina", "Uruguay", "Portugal", "Mexico"] },
+      { "harvester": "Zach", "teams": ["Spain", "England", "Russia", "Greece"] }
+    ]
+  </script>
+  <script id="teams-data-island" type="application/json">
+    [
+      { "country": "Brazil", "group": "A" },
+      { "country": "Cameroon", "group": "A" },
+      { "country": "Croatia", "group": "A" },
+      { "country": "Mexico", "group": "A" },
+      { "country": "Australia", "group": "B" },
+      { "country": "Chile", "group": "B" },
+      { "country": "Netherlands", "group": "B" },
+      { "country": "Spain", "group": "B" },
+      { "country": "Colombia", "group": "C" },
+      { "country": "Greece", "group": "C" },
+      { "country": "Ivory Coast", "group": "C" },
+      { "country": "Japan", "group": "C" },
+      { "country": "Costa Rica", "group": "D" },
+      { "country": "England", "group": "D" },
+      { "country": "Italy", "group": "D" },
+      { "country": "Uruguay", "group": "D" },
+      { "country": "Ecuador", "group": "E" },
+      { "country": "France", "group": "E" },
+      { "country": "Honduras", "group": "E" },
+      { "country": "Switzerland", "group": "E" },
+      { "country": "Argentina", "group": "F" },
+      { "country": "Bosnia-Herzegovina", "group": "F" },
+      { "country": "Iran", "group": "F" },
+      { "country": "Nigeria", "group": "F" },
+      { "country": "Germany", "group": "G" },
+      { "country": "Ghana", "group": "G" },
+      { "country": "Portugal", "group": "G" },
+      { "country": "United States", "group": "G" },
+      { "country": "Algeria", "group": "H" },
+      { "country": "Belgium", "group": "H" },
+      { "country": "Russia", "group": "H" },
+      { "country": "South Korea", "group": "H" }
+    ]
+  </script>
+  <script type="text/javascript" src="js/world-cup.js"></script>
+</body>
+</html>

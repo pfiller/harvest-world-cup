@@ -1,0 +1,70 @@
+WorldCup = { Collections: {}, Models: {}, Views: {} }
+
+class WorldCup.Models.Team extends Backbone.Model
+  points: () ->
+    return points if points = @get('points')
+
+    @set('points', 0)
+    return 0
+
+class WorldCup.Collections.Teams extends Backbone.Collection
+  model: WorldCup.Models.Team
+
+class WorldCup.Models.Pick extends Backbone.Model
+  parse: (data) ->
+    data.total = 0
+
+    teams = []
+    for team, i in data.teams
+      teamModel = window.teams.findWhere({country: team})
+      points = teamModel.points()
+      data.total += teamModel.points()
+      teams.push { team, points }
+    data.teams = teams
+    data
+
+class WorldCup.Collections.Picks extends Backbone.Collection
+  model: WorldCup.Models.Pick
+  comparator: (a, b) ->
+    if a.get('points') is b.get('points')
+      return if a.get('harvester') < b.get('harvester') then -1 else 1
+    else
+      return if a.get('points') < b.get('points') then -1 else 1
+
+class WorldCup.Views.Picks extends Backbone.View
+  template: """
+    <li>
+      <h2><%- harvester %></h2>
+      <table>
+        <% _.each(teams, function(team) { %>
+          <tr>
+            <td><%= team.team %></td>
+            <td><%= team.points %></td>
+          </tr>
+        <% }); %>
+          <tr>
+            <td></td>
+            <td><%- total %></td>
+      </table>
+    </li>
+    """
+
+  initialize: () ->
+    @render()
+
+  render: () ->
+    html = ''
+    for pick in @collection.models
+      html +=  @team_row_html(pick)
+    @$el.html(html)
+
+  team_row_html: (pick) ->
+    _.template(@template, pick.toJSON())
+
+$ ->
+  data = ferry_data_from_island("picks","teams")
+
+  window.teams = new WorldCup.Collections.Teams(data.teams)
+  new WorldCup.Views.Picks
+    collection: new WorldCup.Collections.Picks(data.picks, {parse: true})
+    el: $(".js-picks")
