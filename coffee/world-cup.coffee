@@ -4,8 +4,9 @@ class WorldCup.Models.Team extends Backbone.Model
   points: () ->
     return points if points = @get('points')
 
-    @set('points', 0)
-    return 0
+    groupPoints = (@get('groupWins') * 3) + (@get('groupTies') * 1)
+    @set('points', groupPoints)
+    return groupPoints
 
 class WorldCup.Collections.Teams extends Backbone.Collection
   model: WorldCup.Models.Team
@@ -26,10 +27,10 @@ class WorldCup.Models.Pick extends Backbone.Model
 class WorldCup.Collections.Picks extends Backbone.Collection
   model: WorldCup.Models.Pick
   comparator: (a, b) ->
-    if a.get('points') is b.get('points')
+    if a.get('total') is b.get('total')
       return if a.get('harvester') < b.get('harvester') then -1 else 1
     else
-      return if a.get('points') < b.get('points') then -1 else 1
+      return if a.get('total') > b.get('total') then -1 else 1
 
 class WorldCup.Views.Picks extends Backbone.View
   template: """

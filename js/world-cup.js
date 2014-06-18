@@ -19,12 +19,13 @@
     }
 
     Team.prototype.points = function() {
-      var points;
+      var groupPoints, points;
       if (points = this.get('points')) {
         return points;
       }
-      this.set('points', 0);
-      return 0;
+      groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1);
+      this.set('points', groupPoints);
+      return groupPoints;
     };
 
     return Team;
@@ -89,14 +90,14 @@
     Picks.prototype.model = WorldCup.Models.Pick;
 
     Picks.prototype.comparator = function(a, b) {
-      if (a.get('points') === b.get('points')) {
+      if (a.get('total') === b.get('total')) {
         if (a.get('harvester') < b.get('harvester')) {
           return -1;
         } else {
           return 1;
         }
       } else {
-        if (a.get('points') < b.get('points')) {
+        if (a.get('total') > b.get('total')) {
           return -1;
         } else {
           return 1;
