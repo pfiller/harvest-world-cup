@@ -70,7 +70,12 @@ h2 {
 td:first-child {
   width: 140px;
 }
+td:last-child {
+  text-align: center;
+  width: 20px;
+}
 th {
   color: green;
   font-weight: bold;
+  text-align: center;
 }
