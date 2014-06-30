@@ -19,12 +19,13 @@
     }
 
     Team.prototype.points = function() {
-      var groupPoints, points;
+      var groupPoints, knockoutPoints, points, _ref1;
       if (points = this.get('points')) {
         return points;
       }
-      groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1) + (this.get('knockoutWins') * 5);
-      this.set('points', groupPoints);
+      groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1);
+      knockoutPoints = ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) * 5;
+      this.set('points', groupPoints + knockoutPoints);
       return groupPoints;
     };
 
