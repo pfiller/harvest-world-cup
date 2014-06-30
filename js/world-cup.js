@@ -23,7 +23,7 @@
       if (points = this.get('points')) {
         return points;
       }
-      groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1);
+      groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1) + (this.get('knockoutWins') * 5);
       this.set('points', groupPoints);
       return groupPoints;
     };
