@@ -25,8 +25,9 @@
       }
       groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1);
       knockoutPoints = ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) * 5;
-      this.set('points', groupPoints + knockoutPoints);
-      return groupPoints;
+      points = groupPoints + knockoutPoints;
+      this.set('points', points);
+      return points;
     };
 
     return Team;

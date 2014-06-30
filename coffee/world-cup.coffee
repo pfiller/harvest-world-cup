@@ -6,8 +6,10 @@ class WorldCup.Models.Team extends Backbone.Model
 
     groupPoints = (@get('groupWins') * 3) + (@get('groupTies') * 1)
     knockoutPoints = (@get('knockoutWins') ? 0) * 5
-    @set('points', groupPoints + knockoutPoints)
-    return groupPoints
+
+    points = groupPoints + knockoutPoints
+    @set('points', points)
+    return points
 
 class WorldCup.Collections.Teams extends Backbone.Collection
   model: WorldCup.Models.Team
