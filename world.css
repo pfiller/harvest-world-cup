@@ -79,3 +79,7 @@ th {
   font-weight: bold;
   text-align: center;
 }
+td.eliminated {
+  color: #999;
+  text-decoration: line-through;
+}
