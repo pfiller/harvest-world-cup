@@ -30,6 +30,11 @@
       return points;
     };
 
+    Team.prototype.eliminated = function() {
+      var _ref1;
+      return ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) < 2;
+    };
+
     return Team;
 
   })(Backbone.Model);
@@ -57,7 +62,7 @@
     }
 
     Pick.prototype.parse = function(data) {
-      var i, points, team, teamModel, teams, _i, _len, _ref3;
+      var eliminated, i, points, team, teamModel, teams, _i, _len, _ref3;
       data.total = 0;
       teams = [];
       _ref3 = data.teams;
@@ -67,10 +72,12 @@
           country: team
         });
         points = teamModel.points();
+        eliminated = teamModel.eliminated();
         data.total += teamModel.points();
         teams.push({
           team: team,
-          points: points
+          points: points,
+          eliminated: eliminated
         });
       }
       data.teams = teams;
@@ -119,7 +126,7 @@
       return _ref4;
     }
 
-    Picks.prototype.template = "<li>\n  <h2><%- harvester %></h2>\n  <table>\n    <% _.each(teams, function(team) { %>\n      <tr>\n        <td><%= team.team %></td>\n        <td><%= team.points %></td>\n      </tr>\n    <% }); %>\n      <tr>\n        <td></td>\n        <th><%- total %></th>\n  </table>\n</li>";
+    Picks.prototype.template = "<li>\n  <h2><%- harvester %></h2>\n  <table>\n    <% _.each(teams, function(team) { %>\n      <tr>\n        <td<%= team.cssClass %>><%= team.team %></td>\n        <td><%= team.points %></td>\n      </tr>\n    <% }); %>\n      <tr>\n        <td></td>\n        <th><%- total %></th>\n  </table>\n</li>";
 
     Picks.prototype.initialize = function() {
       return this.render();
@@ -137,7 +144,14 @@
     };
 
     Picks.prototype.team_row_html = function(pick) {
-      return _.template(this.template, pick.toJSON());
+      var attrs, team, _i, _len, _ref5;
+      attrs = pick.toJSON();
+      _ref5 = attrs.teams;
+      for (_i = 0, _len = _ref5.length; _i < _len; _i++) {
+        team = _ref5[_i];
+        team.cssClass = team.eliminated ? ' class ="eliminated"' : '';
+      }
+      return _.template(this.template, attrs);
     };
 
     return Picks;
