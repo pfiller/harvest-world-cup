@@ -11,6 +11,9 @@ class WorldCup.Models.Team extends Backbone.Model
     @set('points', points)
     return points
 
+  eliminated: () ->
+    (@get('knockoutWins') ? 0) < 2
+
 class WorldCup.Collections.Teams extends Backbone.Collection
   model: WorldCup.Models.Team
 
@@ -22,8 +25,9 @@ class WorldCup.Models.Pick extends Backbone.Model
     for team, i in data.teams
       teamModel = window.teams.findWhere({country: team})
       points = teamModel.points()
+      eliminated = teamModel.eliminated()
       data.total += teamModel.points()
-      teams.push { team, points }
+      teams.push { team, points, eliminated}
     data.teams = teams
     data
 
@@ -42,7 +46,7 @@ class WorldCup.Views.Picks extends Backbone.View
       <table>
         <% _.each(teams, function(team) { %>
           <tr>
-            <td><%= team.team %></td>
+            <td<%= team.cssClass %>><%= team.team %></td>
             <td><%= team.points %></td>
           </tr>
         <% }); %>
@@ -63,7 +67,10 @@ class WorldCup.Views.Picks extends Backbone.View
     @$el.html(html)
 
   team_row_html: (pick) ->
-    _.template(@template, pick.toJSON())
+    attrs = pick.toJSON()
+    for team in attrs.teams
+      team.cssClass = if team.eliminated then ' class ="eliminated"' else ''
+    _.template(@template, attrs)
 
 $ ->
   data = ferry_data_from_island("picks","teams")
