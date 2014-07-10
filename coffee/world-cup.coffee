@@ -12,7 +12,7 @@ class WorldCup.Models.Team extends Backbone.Model
     return points
 
   eliminated: () ->
-    (@get('knockoutWins') ? 0) < 2
+    (@get('knockoutWins') ? 0) < 3
 
 class WorldCup.Collections.Teams extends Backbone.Collection
   model: WorldCup.Models.Team

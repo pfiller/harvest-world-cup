@@ -32,7 +32,7 @@
 
     Team.prototype.eliminated = function() {
       var _ref1;
-      return ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) < 2;
+      return ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) < 3;
     };
 
     return Team;
