@@ -6,13 +6,14 @@ class WorldCup.Models.Team extends Backbone.Model
 
     groupPoints = (@get('groupWins') * 3) + (@get('groupTies') * 1)
     knockoutPoints = (@get('knockoutWins') ? 0) * 5
+    championshipPoints = if knockoutPoints is 20 then 5 else 0
 
-    points = groupPoints + knockoutPoints
+    points = groupPoints + knockoutPoints + championshipPoints
     @set('points', points)
     return points
 
   eliminated: () ->
-    (@get('knockoutWins') ? 0) < 3
+    @get('country') isnt 'Germany'
 
 class WorldCup.Collections.Teams extends Backbone.Collection
   model: WorldCup.Models.Team

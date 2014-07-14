@@ -19,20 +19,20 @@
     }
 
     Team.prototype.points = function() {
-      var groupPoints, knockoutPoints, points, _ref1;
+      var championshipPoints, groupPoints, knockoutPoints, points, _ref1;
       if (points = this.get('points')) {
         return points;
       }
       groupPoints = (this.get('groupWins') * 3) + (this.get('groupTies') * 1);
       knockoutPoints = ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) * 5;
-      points = groupPoints + knockoutPoints;
+      championshipPoints = knockoutPoints === 20 ? 5 : 0;
+      points = groupPoints + knockoutPoints + championshipPoints;
       this.set('points', points);
       return points;
     };
 
     Team.prototype.eliminated = function() {
-      var _ref1;
-      return ((_ref1 = this.get('knockoutWins')) != null ? _ref1 : 0) < 3;
+      return this.get('country') !== 'Germany';
     };
 
     return Team;
